@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+YPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -72,44 +72,140 @@
 
                 <!-- Platform Filters -->
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                    <button class="bg-white p-3 rounded-xl shadow-sm border-2 border-blue-600 text-blue-600 font-semibold flex items-center gap-2"><i class="fa-brands fa-instagram"></i> Instagram</button>
-                    <button class="bg-white p-3 rounded-xl shadow-sm border border-slate-200 text-slate-600 font-semibold flex items-center gap-2 hover:bg-slate-50"><i class="fa-brands fa-facebook"></i> Facebook</button>
-                    <button class="bg-white p-3 rounded-xl shadow-sm border border-slate-200 text-slate-600 font-semibold flex items-center gap-2 hover:bg-slate-50"><i class="fa-brands fa-youtube"></i> Youtube</button>
-                    <button class="bg-white p-3 rounded-xl shadow-sm border border-slate-200 text-slate-600 font-semibold flex items-center gap-2 hover:bg-slate-50"><i class="fa-brands fa-telegram"></i> Telegram</button>
+                    <button onclick="filterPlatform('instagram')" id="btn-instagram" class="platform-btn bg-white p-3 rounded-xl shadow-sm border-2 border-blue-600 text-blue-600 font-semibold flex items-center gap-2 transition"><i class="fa-brands fa-instagram"></i> Instagram</button>
+                    <button onclick="filterPlatform('facebook')" id="btn-facebook" class="platform-btn bg-white p-3 rounded-xl shadow-sm border border-slate-200 text-slate-600 font-semibold flex items-center gap-2 hover:bg-slate-50 transition"><i class="fa-brands fa-facebook"></i> Facebook</button>
+                    <button onclick="filterPlatform('youtube')" id="btn-youtube" class="platform-btn bg-white p-3 rounded-xl shadow-sm border border-slate-200 text-slate-600 font-semibold flex items-center gap-2 hover:bg-slate-50 transition"><i class="fa-brands fa-youtube"></i> Youtube</button>
+                    <button onclick="filterPlatform('telegram')" id="btn-telegram" class="platform-btn bg-white p-3 rounded-xl shadow-sm border border-slate-200 text-slate-600 font-semibold flex items-center gap-2 hover:bg-slate-50 transition"><i class="fa-brands fa-telegram"></i> Telegram</button>
                 </div>
 
                 <!-- Order Form Section -->
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 max-w-2xl">
                     <h2 class="text-lg font-bold text-slate-800 mb-4">Create New Order</h2>
-                    <div class="space-y-4">
+                    <form id="orderForm" class="space-y-4">
                         <div>
                             <label class="block text-sm font-medium text-slate-600 mb-1">Category</label>
-                            <select class="w-full p-3 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600">
-                                <option>YouTube Watch Hours & Views</option>
-                                <option>Instagram Followers (HQ)</option>
-                                <option>TikTok Likes & Views</option>
+                            <select id="categorySelect" class="w-full p-3 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600">
+                                <!-- Dynamically filled -->
                             </select>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-slate-600 mb-1">Service</label>
-                            <select class="w-full p-3 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600">
-                                <option>YouTube Monetization Watchtime [Max 4000H]</option>
-                            </select>
+                            <label class="block text-sm font-medium text-slate-600 mb-1">Service ID</label>
+                            <input type="text" id="serviceId" placeholder="Enter JAP Service ID" class="w-full p-3 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600" required>
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-slate-600 mb-1">Link</label>
-                            <input type="text" placeholder="https://www.youtube.com/watch?v=..." class="w-full p-3 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600">
+                            <input type="text" id="targetLink" placeholder="https://..." class="w-full p-3 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600" required>
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-slate-600 mb-1">Quantity</label>
-                            <input type="number" placeholder="1000" class="w-full p-3 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600">
+                            <input type="number" id="quantity" placeholder="1000" class="w-full p-3 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600" required>
                         </div>
-                        <button class="w-full bg-blue-600 text-white font-bold p-3 rounded-xl hover:bg-blue-700 transition">Place Order</button>
-                    </div>
+                        <button type="submit" class="w-full bg-blue-600 text-white font-bold p-3 rounded-xl hover:bg-blue-700 transition">Place Order</button>
+                    </form>
+                    <div id="orderMessage" class="mt-4 text-sm font-semibold"></div>
                 </div>
             </main>
         </div>
     </div>
+
+    <script>
+    // Platform wise categories data
+    const servicesData = {
+        instagram: [
+            { name: "Instagram Followers (HQ)", sampleServiceId: "101" },
+            { name: "Instagram Likes & Views", sampleServiceId: "102" }
+        ],
+        facebook: [
+            { name: "Facebook Page Likes & Followers", sampleServiceId: "201" },
+            { name: "Facebook Video Views", sampleServiceId: "202" }
+        ],
+        youtube: [
+            { name: "YouTube Monetization Watchtime [Max 4000H]", sampleServiceId: "301" },
+            { name: "YouTube Views & Subscribers", sampleServiceId: "302" }
+        ],
+        telegram: [
+            { name: "Telegram Channel Members", sampleServiceId: "401" },
+            { name: "Telegram Post Views", sampleServiceId: "402" }
+        ]
+    };
+
+    function filterPlatform(platform) {
+        document.querySelectorAll('.platform-btn').forEach(btn => {
+            btn.classList.remove('border-2', 'border-blue-600', 'text-blue-600');
+            btn.classList.add('border', 'border-slate-200', 'text-slate-600');
+        });
+        const activeBtn = document.getElementById('btn-' + platform);
+        activeBtn.classList.remove('border', 'border-slate-200', 'text-slate-600');
+        activeBtn.classList.add('border-2', 'border-blue-600', 'text-blue-600');
+
+        const categorySelect = document.getElementById('categorySelect');
+        categorySelect.innerHTML = '';
+        
+        servicesData[platform].forEach(item => {
+            const opt = document.createElement('option');
+            opt.value = item.sampleServiceId;
+            opt.textContent = item.name;
+            categorySelect.appendChild(opt);
+        });
+
+        document.getElementById('serviceId').value = servicesData[platform][0].sampleServiceId;
+    }
+
+    filterPlatform('instagram');
+
+    document.getElementById('categorySelect').addEventListener('change', function(e) {
+        document.getElementById('serviceId').value = e.target.value;
+    });
+
+    // Handle Order Submission
+    document.getElementById('orderForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const service = document.getElementById('serviceId').value;
+        const link = document.getElementById('targetLink').value;
+        const quantity = document.getElementById('quantity').value;
+        const apiKey = "cb508e7eeff9002abb8c2c0ccd14c0a"; // Your JAP API Key[cite: 1]
+        
+        // সঠিক CORS প্রক্সি ফরম্যাট ব্যবহার করা হয়েছে
+        const apiUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent('https://justanotherpanel.com/api/v2');
+        const messageDiv = document.getElementById('orderMessage');
+        
+        messageDiv.innerText = "Processing order...";
+        messageDiv.className = "mt-4 text-sm font-semibold text-blue-600";
+        
+        const postData = new URLSearchParams();
+        postData.append('key', apiKey);
+        postData.append('action', 'add');
+        postData.append('service', service);
+        postData.append('link', link);
+        postData.append('quantity', quantity);
+
+        try {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: postData
+            });
+            
+            const result = await response.json();
+            if(result.order) {
+                messageDiv.innerText = "Order Successful! Order ID: " + result.order;
+                messageDiv.className = "mt-4 text-sm font-semibold text-emerald-600";
+            } else {
+                messageDiv.innerText = "Error: " + (result.error || "Something went wrong");
+                messageDiv.className = "mt-4 text-sm font-semibold text-red-600";
+            }
+        } catch (error) {
+            messageDiv.innerText = "Network Error! Connection failed.";
+            messageDiv.className = "mt-4 text-sm font-semibold text-amber-600";
+            console.error('Error:', error);
+        }
+    });
+    </script>
+</body>
+</html>
 
 </body>
 </html>
