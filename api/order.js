@@ -1,10 +1,11 @@
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
   const { service, link, quantity } = req.body;
-  const apiKey = "cb508e7eeff9002abb8c2c0ccd14c0a"; // আপনার JAP API Key
+  const apiKey = "474d7f1f7544c2347f59b63d65631a66"; // Updated JAP API Key
 
   try {
     const response = await fetch('https://justanotherpanel.com/api/v2', {
