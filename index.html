@@ -1,4 +1,4 @@
-YPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -157,36 +157,25 @@ YPE html>
         document.getElementById('serviceId').value = e.target.value;
     });
 
-    // Handle Order Submission
+    // Handle Order Submission - Vercel Serverless API Call
     document.getElementById('orderForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         
         const service = document.getElementById('serviceId').value;
         const link = document.getElementById('targetLink').value;
         const quantity = document.getElementById('quantity').value;
-        const apiKey = "cb508e7eeff9002abb8c2c0ccd14c0a"; // Your JAP API Key[cite: 1]
         
-        // সঠিক CORS প্রক্সি ফরম্যাট ব্যবহার করা হয়েছে
-        const apiUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent('https://justanotherpanel.com/api/v2');
         const messageDiv = document.getElementById('orderMessage');
-        
         messageDiv.innerText = "Processing order...";
         messageDiv.className = "mt-4 text-sm font-semibold text-blue-600";
-        
-        const postData = new URLSearchParams();
-        postData.append('key', apiKey);
-        postData.append('action', 'add');
-        postData.append('service', service);
-        postData.append('link', link);
-        postData.append('quantity', quantity);
 
         try {
-            const response = await fetch(apiUrl, {
+            const response = await fetch('/api/order', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
+                    'Content-Type': 'application/json'
                 },
-                body: postData
+                body: JSON.stringify({ service, link, quantity })
             });
             
             const result = await response.json();
@@ -204,8 +193,5 @@ YPE html>
         }
     });
     </script>
-</body>
-</html>
-
 </body>
 </html>
