@@ -1,16 +1,115 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My SMM Panel</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin-top: 100px; background-color: #f4f4f9; }
-        h1 { color: #333; }
-        p { color: #666; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMM Social Genie - Professional Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
-    <h1>স্বাগতম আমার এস এম এম প্যানেলে!</h1>
-    <p>খুব শীঘ্রই এখানে আমাদের সার্ভিসগুলো দেখতে পাবেন।</p>
+<body class="bg-slate-100 font-sans">
+
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="w-64 bg-blue-600 text-white flex flex-col hidden md:flex">
+            <div class="p-5 text-2xl font-bold flex items-center gap-2">
+                <i class="fa-solid fa-bolt"></i> Social Genie
+            </div>
+            <div class="px-4 py-3 bg-blue-700 mx-3 rounded-lg mb-4 flex items-center justify-between">
+                <div>
+                    <p class="text-xs text-blue-200">Welcome,</p>
+                    <p class="font-semibold">farhan09</p>
+                </div>
+                <span class="bg-blue-500 text-xs px-2 py-1 rounded">$0</span>
+            </div>
+            <nav class="flex-1 px-3 space-y-1">
+                <a href="#" class="flex items-center gap-3 px-4 py-3 bg-blue-700 rounded-xl font-medium"><i class="fa-solid fa-cart-shopping"></i> New Order</a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-blue-700 rounded-xl font-medium transition"><i class="fa-solid fa-boxes-stacked"></i> Bulk Order</a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-blue-700 rounded-xl font-medium transition"><i class="fa-solid fa-clock-rotate-left"></i> Orders History</a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-blue-700 rounded-xl font-medium transition"><i class="fa-solid fa-list"></i> Services</a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-blue-700 rounded-xl font-medium transition"><i class="fa-solid fa-wallet"></i> Add Funds</a>
+                <a href="#" class="flex items-center gap-3 px-4 py-3 hover:bg-blue-700 rounded-xl font-medium transition"><i class="fa-solid fa-headset"></i> Tickets Support</a>
+            </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-y-auto">
+            <!-- Topbar -->
+            <header class="bg-white shadow-sm px-6 py-4 flex justify-between items-center">
+                <h1 class="text-xl font-bold text-slate-800">New Order</h1>
+                <div class="flex items-center gap-4">
+                    <span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-sm font-medium"><i class="fa-regular fa-calendar"></i> Sep 19, 2026</span>
+                    <div class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">F</div>
+                </div>
+            </header>
+
+            <!-- Content Body -->
+            <main class="p-6 space-y-6">
+                <!-- Stats Row -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between">
+                        <div>
+                            <p class="text-slate-500 text-sm">My Balance</p>
+                            <h3 class="text-2xl font-bold text-slate-800">$0 <span class="text-xs text-blue-600 bg-blue-50 px-2 py-0.5 rounded">USD</span></h3>
+                        </div>
+                        <div class="w-12 h-12 bg-amber-50 text-amber-500 rounded-xl flex items-center justify-center text-xl"><i class="fa-solid fa-wallet"></i></div>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between">
+                        <div>
+                            <p class="text-slate-500 text-sm">Total Orders</p>
+                            <h3 class="text-2xl font-bold text-slate-800">136</h3>
+                        </div>
+                        <div class="w-12 h-12 bg-purple-50 text-purple-500 rounded-xl flex items-center justify-center text-xl"><i class="fa-solid fa-cart-flatbed"></i></div>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex items-center justify-between">
+                        <div>
+                            <p class="text-slate-500 text-sm">Spent Balance</p>
+                            <h3 class="text-2xl font-bold text-slate-800">$0</h3>
+                        </div>
+                        <div class="w-12 h-12 bg-emerald-50 text-emerald-500 rounded-xl flex items-center justify-center text-xl"><i class="fa-solid fa-money-bill-wave"></i></div>
+                    </div>
+                </div>
+
+                <!-- Platform Filters -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <button class="bg-white p-3 rounded-xl shadow-sm border-2 border-blue-600 text-blue-600 font-semibold flex items-center gap-2"><i class="fa-brands fa-instagram"></i> Instagram</button>
+                    <button class="bg-white p-3 rounded-xl shadow-sm border border-slate-200 text-slate-600 font-semibold flex items-center gap-2 hover:bg-slate-50"><i class="fa-brands fa-facebook"></i> Facebook</button>
+                    <button class="bg-white p-3 rounded-xl shadow-sm border border-slate-200 text-slate-600 font-semibold flex items-center gap-2 hover:bg-slate-50"><i class="fa-brands fa-youtube"></i> Youtube</button>
+                    <button class="bg-white p-3 rounded-xl shadow-sm border border-slate-200 text-slate-600 font-semibold flex items-center gap-2 hover:bg-slate-50"><i class="fa-brands fa-telegram"></i> Telegram</button>
+                </div>
+
+                <!-- Order Form Section -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 max-w-2xl">
+                    <h2 class="text-lg font-bold text-slate-800 mb-4">Create New Order</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-600 mb-1">Category</label>
+                            <select class="w-full p-3 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600">
+                                <option>YouTube Watch Hours & Views</option>
+                                <option>Instagram Followers (HQ)</option>
+                                <option>TikTok Likes & Views</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-600 mb-1">Service</label>
+                            <select class="w-full p-3 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600">
+                                <option>YouTube Monetization Watchtime [Max 4000H]</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-600 mb-1">Link</label>
+                            <input type="text" placeholder="https://www.youtube.com/watch?v=..." class="w-full p-3 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-600 mb-1">Quantity</label>
+                            <input type="number" placeholder="1000" class="w-full p-3 border border-slate-200 rounded-xl focus:outline-none focus:border-blue-600">
+                        </div>
+                        <button class="w-full bg-blue-600 text-white font-bold p-3 rounded-xl hover:bg-blue-700 transition">Place Order</button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
 </body>
 </html>
